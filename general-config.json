@@ -1,0 +1,28 @@
+{
+    "channelConfigPath": "./network/local/channel/evidence.tx",
+    "eventWaitTime": 600000,
+    "loglevel": "INFO",
+    "chaincodePath": "./chaincode/token-erc-721/chaincode-go/",
+    "adminList": [
+        {
+            "org": "motorvehicledepartment",
+            "username": "admin",
+            "password": "adminpw"
+        },
+        {
+            "org": "licinsurance",
+            "username": "admin",
+            "password": "adminpw"
+        },
+        {
+            "org": "bajajinsurance",
+            "username": "admin",
+            "password": "adminpw"
+        },
+        {
+            "org": "benzmanufacturer",
+            "username": "admin",
+            "password": "adminpw"
+        }
+    ]
+}

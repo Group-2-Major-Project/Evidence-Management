@@ -1,0 +1,2 @@
+Committed chaincode definition for chaincode 'evidenceCC' on channel 'evidence':
+Version: 1.0, Sequence: 1, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [bajajinsurancemsp: true, benzmanufacturermsp: true, licinsurancemsp: true, motorvehicledepartmentmsp: true]

@@ -1,0 +1,431 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: "2.4"
+
+volumes:
+  orderer1:
+  peer0.motorvehicledepartment:
+  peer1.motorvehicledepartment:
+  peer0.licinsurance:
+  peer1.licinsurance:
+  peer0.bajajinsurance:
+  peer1.bajajinsurance:
+  peer0.benzmanufacturer:
+  peer1.benzmanufacturer:
+
+networks:
+  Evidence:
+    name: fabric_test
+
+services:
+  orderer1:
+    container_name: orderer1
+    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    environment:
+      - FABRIC_LOGGING_SPEC=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_LISTENPORT=1100
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=orderer1-MSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:11100
+      # enabled TLS
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_KAFKA_TOPIC_REPLICATIONFACTOR=1
+      - ORDERER_KAFKA_VERBOSE=true
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: orderer
+    volumes:
+      - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ../organizations/ordererOrganizations/orderer1/config.orderers/msp:/var/hyperledger/orderer/msp
+      - ../organizations/ordererOrganizations/orderer1/config.orderers/tls/:/var/hyperledger/orderer/tls
+      - orderer1:/var/hyperledger/production/orderer
+    ports:
+      - 1100:1100
+      - 11100:11100
+    networks:
+      - Evidence
+
+  peer0.motorvehicledepartment:
+    container_name: peer0.motorvehicledepartment
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=Evidence
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer0.motorvehicledepartment
+      - CORE_PEER_ADDRESS=peer0.motorvehicledepartment:4444
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:4444
+      - CORE_PEER_CHAINCODEADDRESS=peer0.motorvehicledepartment:4445
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:4445
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.motorvehicledepartment:4444
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.motorvehicledepartment:4444
+      - CORE_PEER_LOCALMSPID=motorvehicledepartmentmsp
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:14444
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_PVTDATA_PUSHACKTIMEOUT=12s
+      - CORE_PEER_EVENTS_ADDRESS=0.0.0.0:4446
+    volumes:
+      - /var/run/docker.sock:/host/var/run/docker.sock
+      - ../organizations/peerOrganizations/motorvehicledepartment/peers/peer0.motorvehicledepartment/msp:/etc/hyperledger/fabric/msp
+      - ../organizations/peerOrganizations/motorvehicledepartment/peers/peer0.motorvehicledepartment/tls:/etc/hyperledger/fabric/tls
+      - peer0.motorvehicledepartment:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 4444:4444
+      - 14444:14444
+    networks:
+      - Evidence
+
+  peer1.motorvehicledepartment:
+    container_name: peer1.motorvehicledepartment
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=Evidence
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer1.motorvehicledepartment
+      - CORE_PEER_ADDRESS=peer1.motorvehicledepartment:4454
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:4454
+      - CORE_PEER_CHAINCODEADDRESS=peer1.motorvehicledepartment:4455
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:4455
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.motorvehicledepartment:4454
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.motorvehicledepartment:4454
+      - CORE_PEER_LOCALMSPID=motorvehicledepartmentmsp
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:14454
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_PVTDATA_PUSHACKTIMEOUT=12s
+      - CORE_PEER_EVENTS_ADDRESS=0.0.0.0:4456
+    volumes:
+      - /var/run/docker.sock:/host/var/run/docker.sock
+      - ../organizations/peerOrganizations/motorvehicledepartment/peers/peer1.motorvehicledepartment/msp:/etc/hyperledger/fabric/msp
+      - ../organizations/peerOrganizations/motorvehicledepartment/peers/peer1.motorvehicledepartment/tls:/etc/hyperledger/fabric/tls
+      - peer1.motorvehicledepartment:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 4454:4454
+      - 14454:14454
+    networks:
+      - Evidence
+
+  peer0.licinsurance:
+    container_name: peer0.licinsurance
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=Evidence
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer0.licinsurance
+      - CORE_PEER_ADDRESS=peer0.licinsurance:5555
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:5555
+      - CORE_PEER_CHAINCODEADDRESS=peer0.licinsurance:5556
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:5556
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.licinsurance:5555
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.licinsurance:5555
+      - CORE_PEER_LOCALMSPID=licinsurancemsp
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:15555
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_PVTDATA_PUSHACKTIMEOUT=12s
+      - CORE_PEER_EVENTS_ADDRESS=0.0.0.0:5557
+    volumes:
+      - /var/run/docker.sock:/host/var/run/docker.sock
+      - ../organizations/peerOrganizations/licinsurance/peers/peer0.licinsurance/msp:/etc/hyperledger/fabric/msp
+      - ../organizations/peerOrganizations/licinsurance/peers/peer0.licinsurance/tls:/etc/hyperledger/fabric/tls
+      - peer0.licinsurance:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 5555:5555
+      - 15555:15555
+    networks:
+      - Evidence
+
+  peer1.licinsurance:
+    container_name: peer1.licinsurance
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=Evidence
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer1.licinsurance
+      - CORE_PEER_ADDRESS=peer1.licinsurance:5565
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:5565
+      - CORE_PEER_CHAINCODEADDRESS=peer1.licinsurance:5566
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:5566
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.licinsurance:5565
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.licinsurance:5565
+      - CORE_PEER_LOCALMSPID=licinsurancemsp
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:15565
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_PVTDATA_PUSHACKTIMEOUT=12s
+      - CORE_PEER_EVENTS_ADDRESS=0.0.0.0:5567
+    volumes:
+      - /var/run/docker.sock:/host/var/run/docker.sock
+      - ../organizations/peerOrganizations/licinsurance/peers/peer1.licinsurance/msp:/etc/hyperledger/fabric/msp
+      - ../organizations/peerOrganizations/licinsurance/peers/peer1.licinsurance/tls:/etc/hyperledger/fabric/tls
+      - peer1.licinsurance:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 5565:5565
+      - 15565:15565
+    networks:
+      - Evidence
+
+  peer0.bajajinsurance:
+    container_name: peer0.bajajinsurance
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=Evidence
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer0.bajajinsurance
+      - CORE_PEER_ADDRESS=peer0.bajajinsurance:6666
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:6666
+      - CORE_PEER_CHAINCODEADDRESS=peer0.bajajinsurance:6667
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:6667
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.bajajinsurance:6666
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bajajinsurance:6666
+      - CORE_PEER_LOCALMSPID=bajajinsurancemsp
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:16666
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_PVTDATA_PUSHACKTIMEOUT=12s
+      - CORE_PEER_EVENTS_ADDRESS=0.0.0.0:6668
+    volumes:
+      - /var/run/docker.sock:/host/var/run/docker.sock
+      - ../organizations/peerOrganizations/bajajinsurance/peers/peer0.bajajinsurance/msp:/etc/hyperledger/fabric/msp
+      - ../organizations/peerOrganizations/bajajinsurance/peers/peer0.bajajinsurance/tls:/etc/hyperledger/fabric/tls
+      - peer0.bajajinsurance:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 6666:6666
+      - 16666:16666
+    networks:
+      - Evidence
+
+  peer1.bajajinsurance:
+    container_name: peer1.bajajinsurance
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=Evidence
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer1.bajajinsurance
+      - CORE_PEER_ADDRESS=peer1.bajajinsurance:6676
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:6676
+      - CORE_PEER_CHAINCODEADDRESS=peer1.bajajinsurance:6677
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:6677
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.bajajinsurance:6676
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.bajajinsurance:6676
+      - CORE_PEER_LOCALMSPID=bajajinsurancemsp
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:16676
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_PVTDATA_PUSHACKTIMEOUT=12s
+      - CORE_PEER_EVENTS_ADDRESS=0.0.0.0:6678
+    volumes:
+      - /var/run/docker.sock:/host/var/run/docker.sock
+      - ../organizations/peerOrganizations/bajajinsurance/peers/peer1.bajajinsurance/msp:/etc/hyperledger/fabric/msp
+      - ../organizations/peerOrganizations/bajajinsurance/peers/peer1.bajajinsurance/tls:/etc/hyperledger/fabric/tls
+      - peer1.bajajinsurance:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 6676:6676
+      - 16676:16676
+    networks:
+      - Evidence
+
+  peer0.benzmanufacturer:
+    container_name: peer0.benzmanufacturer
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=Evidence
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer0.benzmanufacturer
+      - CORE_PEER_ADDRESS=peer0.benzmanufacturer:7777
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7777
+      - CORE_PEER_CHAINCODEADDRESS=peer0.benzmanufacturer:7778
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7778
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.benzmanufacturer:7777
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.benzmanufacturer:7777
+      - CORE_PEER_LOCALMSPID=benzmanufacturermsp
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:17777
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_PVTDATA_PUSHACKTIMEOUT=12s
+      - CORE_PEER_EVENTS_ADDRESS=0.0.0.0:7779
+    volumes:
+      - /var/run/docker.sock:/host/var/run/docker.sock
+      - ../organizations/peerOrganizations/benzmanufacturer/peers/peer0.benzmanufacturer/msp:/etc/hyperledger/fabric/msp
+      - ../organizations/peerOrganizations/benzmanufacturer/peers/peer0.benzmanufacturer/tls:/etc/hyperledger/fabric/tls
+      - peer0.benzmanufacturer:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 7777:7777
+      - 17777:17777
+    networks:
+      - Evidence
+
+  peer1.benzmanufacturer:
+    container_name: peer1.benzmanufacturer
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # the following setting starts chaincode containers on the same
+      # bridge network as the peers
+      # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=Evidence
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer1.benzmanufacturer
+      - CORE_PEER_ADDRESS=peer1.benzmanufacturer:7787
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7787
+      - CORE_PEER_CHAINCODEADDRESS=peer1.benzmanufacturer:7788
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7788
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.benzmanufacturer:7787
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.benzmanufacturer:7787
+      - CORE_PEER_LOCALMSPID=benzmanufacturermsp
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:17787
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      - CORE_PEER_GOSSIP_PVTDATA_PUSHACKTIMEOUT=12s
+      - CORE_PEER_EVENTS_ADDRESS=0.0.0.0:7789
+    volumes:
+      - /var/run/docker.sock:/host/var/run/docker.sock
+      - ../organizations/peerOrganizations/benzmanufacturer/peers/peer1.benzmanufacturer/msp:/etc/hyperledger/fabric/msp
+      - ../organizations/peerOrganizations/benzmanufacturer/peers/peer1.benzmanufacturer/tls:/etc/hyperledger/fabric/tls
+      - peer1.benzmanufacturer:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 7787:7787
+      - 17787:17787
+    networks:
+      - Evidence
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=INFO
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+      - /var/run/:/host/var/run/
+      - ../organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
+      - ../scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+    depends_on:
+      - peer0.motorvehicledepartment
+      - peer1.motorvehicledepartment
+      - peer0.licinsurance
+      - peer1.licinsurance
+      - peer0.bajajinsurance
+      - peer1.bajajinsurance
+      - peer0.benzmanufacturer
+      - peer1.benzmanufacturer
+    networks:
+      - Evidence
+
+
+

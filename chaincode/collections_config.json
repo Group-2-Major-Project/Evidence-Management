@@ -1,0 +1,59 @@
+[
+    {
+        "name": "empPvtCollection",
+        "policy": "OR('motorvehicledepartmentmsp.member', 'licinsurancemsp.member', 'bajajinsurancemsp.member', 'benzmanufacturermsp.member' )",
+        "requiredPeerCount": 1,
+        "maxPeerCount": 1,
+        "blockToLive": 1000000,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": true
+    },
+    {
+        "name": "motorvehicledepartmentmspPrivateCollection",
+        "policy": "OR('motorvehicledepartmentmsp.member')",
+        "requiredPeerCount": 1,
+        "maxPeerCount": 3,
+        "blockToLive":3,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": false,
+        "endorsementPolicy": {
+          "signaturePolicy": "OR('motorvehicledepartmentmsp.member', 'licinsurancemsp.member', 'bajajinsurancemsp.member', 'benzmanufacturermsp.member')"
+        }
+      },
+    {
+        "name": "licinsurancemspPrivateCollection",
+        "policy": "OR('licinsurancemsp.member')",
+        "requiredPeerCount": 1,
+        "maxPeerCount": 3,
+        "blockToLive":3,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": false,
+        "endorsementPolicy": {
+          "signaturePolicy": "OR('motorvehicledepartmentmsp.member', 'licinsurancemsp.member', 'bajajinsurancemsp.member', 'benzmanufacturermsp.member')"
+        }
+      },
+    {
+        "name": "bajajinsurancemspPrivateCollection",
+        "policy": "OR('bajajinsurancemsp.member')",
+        "requiredPeerCount": 1,
+        "maxPeerCount": 3,
+        "blockToLive":3,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": false,
+        "endorsementPolicy": {
+          "signaturePolicy": "OR('motorvehicledepartmentmsp.member', 'licinsurancemsp.member', 'bajajinsurancemsp.member', 'benzmanufacturermsp.member')"
+        }
+      },
+    {
+        "name": "benzmanufacturermspPrivateCollection",
+        "policy": "OR('benzmanufacturermsp.member')",
+        "requiredPeerCount": 1,
+        "maxPeerCount": 3,
+        "blockToLive":3,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": false,
+        "endorsementPolicy": {
+          "signaturePolicy": "OR('motorvehicledepartmentmsp.member', 'licinsurancemsp.member', 'bajajinsurancemsp.member', 'benzmanufacturermsp.member')"
+        }
+      }
+]

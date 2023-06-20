@@ -1,0 +1,63 @@
+{
+    "name": "test-network-benzmanufacturer",
+    "version": "1.0.0",
+    "isLocal": true,
+    "client": {
+        "organization": "benzmanufacturer",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "benzmanufacturer": {
+            "mspid": "benzmanufacturermsp",
+            "peers": [
+                "peer0.benzmanufacturer",
+                "peer1.benzmanufacturer"
+            ],
+            "certificateAuthorities": [
+                "ca.benzmanufacturer"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.benzmanufacturer": {
+            "url": "grpcs://localhost:7777",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFjCCAb2gAwIBAgIUc4wNrGxUM6YRn+RYHsGBGNQFmOgwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAER05GCHNhf1rTBtg9N/yL9At4\nSax1hrsu+0eLJO+OtU7SnkvGyQ6MZsI+WAlTd7EJ8A7Mjg1wIDi1potcP1R5C6NF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFJxVbI+6JocTefCAN+RvT/YkoBojMAoGCCqGSM49BAMCA0cAMEQCIA++rj1x3n19\nUw9sAsKF2KklpPduu0fLOqSxhOtUMt3AAiAFLZMMZWIDWKRnIwwJ+2tTP5NF/k4o\n5EOOOd7TsWl3aQ==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.benzmanufacturer",
+                "hostnameOverride": "peer0.benzmanufacturer"
+            }
+        },
+        "peer1.benzmanufacturer": {
+            "url": "grpcs://localhost:7787",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFjCCAb2gAwIBAgIUc4wNrGxUM6YRn+RYHsGBGNQFmOgwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAER05GCHNhf1rTBtg9N/yL9At4\nSax1hrsu+0eLJO+OtU7SnkvGyQ6MZsI+WAlTd7EJ8A7Mjg1wIDi1potcP1R5C6NF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFJxVbI+6JocTefCAN+RvT/YkoBojMAoGCCqGSM49BAMCA0cAMEQCIA++rj1x3n19\nUw9sAsKF2KklpPduu0fLOqSxhOtUMt3AAiAFLZMMZWIDWKRnIwwJ+2tTP5NF/k4o\n5EOOOd7TsWl3aQ==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.benzmanufacturer",
+                "hostnameOverride": "peer1.benzmanufacturer"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.benzmanufacturer": {
+            "url": "https://localhost:7700",
+            "caName": "ca-benzmanufacturer",
+            "tlsCACerts": {
+                "pem": [
+                    "-----BEGIN CERTIFICATE-----\nMIICFjCCAb2gAwIBAgIUc4wNrGxUM6YRn+RYHsGBGNQFmOgwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAER05GCHNhf1rTBtg9N/yL9At4\nSax1hrsu+0eLJO+OtU7SnkvGyQ6MZsI+WAlTd7EJ8A7Mjg1wIDi1potcP1R5C6NF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFJxVbI+6JocTefCAN+RvT/YkoBojMAoGCCqGSM49BAMCA0cAMEQCIA++rj1x3n19\nUw9sAsKF2KklpPduu0fLOqSxhOtUMt3AAiAFLZMMZWIDWKRnIwwJ+2tTP5NF/k4o\n5EOOOd7TsWl3aQ==\n-----END CERTIFICATE-----\n"
+                ]
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

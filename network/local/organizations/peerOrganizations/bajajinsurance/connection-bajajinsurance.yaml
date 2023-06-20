@@ -1,0 +1,87 @@
+---
+name: test-network-bajajinsurance
+isLocal: true
+version: 1.0.0
+client:
+  organization: bajajinsurance
+  connection:
+    timeout:
+      peer:
+        endorser: "300"
+organizations:
+  bajajinsurance:
+    mspid: bajajinsurancemsp
+    peers:
+      - peer0.bajajinsurance
+      - peer1.bajajinsurance
+    certificateAuthorities:
+      - ca.bajajinsurance
+peers:
+  peer0.bajajinsurance:
+    url: grpcs://localhost:6666
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+          MIICFzCCAb2gAwIBAgIUYAoOJctHQDEMucEwvCmagW4sr3YwCgYIKoZIzj0EAwIw
+          aDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK
+          EwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt
+          Y2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG
+          A1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl
+          cmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy
+          dmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESSDlLa3IlBA9sESgtJK1/4s9
+          60NsHIDAGQxzcz96pY7UN6R7R3jg0hNFznqiW/8itN0GCu9tQ7bke6kQKQOGoKNF
+          MEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE
+          FG9kTHaNcg9T4miTPVo9BUj18f4TMAoGCCqGSM49BAMCA0gAMEUCIQCvljKv9R5A
+          q0C5XI+rBSqdiAKRqg4hFrbSjvQc/we9zAIgSLwMzbRYSjQMZP3XQvlBqWzwSypR
+          sMVr8LHAFsAcSms=
+          -----END CERTIFICATE-----
+          
+    grpcOptions:
+      ssl-target-name-override: peer0.bajajinsurance
+      hostnameOverride: peer0.bajajinsurance
+  peer1.bajajinsurance:
+    url: grpcs://localhost:6676
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+          MIICFzCCAb2gAwIBAgIUYAoOJctHQDEMucEwvCmagW4sr3YwCgYIKoZIzj0EAwIw
+          aDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK
+          EwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt
+          Y2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG
+          A1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl
+          cmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy
+          dmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESSDlLa3IlBA9sESgtJK1/4s9
+          60NsHIDAGQxzcz96pY7UN6R7R3jg0hNFznqiW/8itN0GCu9tQ7bke6kQKQOGoKNF
+          MEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE
+          FG9kTHaNcg9T4miTPVo9BUj18f4TMAoGCCqGSM49BAMCA0gAMEUCIQCvljKv9R5A
+          q0C5XI+rBSqdiAKRqg4hFrbSjvQc/we9zAIgSLwMzbRYSjQMZP3XQvlBqWzwSypR
+          sMVr8LHAFsAcSms=
+          -----END CERTIFICATE-----
+          
+    grpcOptions:
+      ssl-target-name-override: peer1.bajajinsurance
+      hostnameOverride: peer1.bajajinsurance
+certificateAuthorities:
+  ca.bajajinsurance:
+    url: https://localhost:6600
+    caName: ca-bajajinsurance
+    tlsCACerts:
+      pem:
+        - |
+          -----BEGIN CERTIFICATE-----
+          MIICFzCCAb2gAwIBAgIUYAoOJctHQDEMucEwvCmagW4sr3YwCgYIKoZIzj0EAwIw
+          aDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK
+          EwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt
+          Y2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG
+          A1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl
+          cmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy
+          dmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESSDlLa3IlBA9sESgtJK1/4s9
+          60NsHIDAGQxzcz96pY7UN6R7R3jg0hNFznqiW/8itN0GCu9tQ7bke6kQKQOGoKNF
+          MEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE
+          FG9kTHaNcg9T4miTPVo9BUj18f4TMAoGCCqGSM49BAMCA0gAMEUCIQCvljKv9R5A
+          q0C5XI+rBSqdiAKRqg4hFrbSjvQc/we9zAIgSLwMzbRYSjQMZP3XQvlBqWzwSypR
+          sMVr8LHAFsAcSms=
+          -----END CERTIFICATE-----
+          
+    httpOptions:
+      verify: false

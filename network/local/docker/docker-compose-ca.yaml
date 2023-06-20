@@ -1,0 +1,104 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: "2.4"
+
+networks:
+  Evidence:
+    name: Evidence
+
+services:
+  ca_motorvehicledepartment:
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-motorvehicledepartment
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=4400
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:14400
+    ports:
+      - "4400:4400"
+      - "14400:14400"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/motorvehicledepartment:/etc/hyperledger/fabric-ca-server
+    container_name: ca_motorvehicledepartment
+    networks:
+      - Evidence
+
+  ca_licinsurance:
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-licinsurance
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=5500
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:15500
+    ports:
+      - "5500:5500"
+      - "15500:15500"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/licinsurance:/etc/hyperledger/fabric-ca-server
+    container_name: ca_licinsurance
+    networks:
+      - Evidence
+
+  ca_bajajinsurance:
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-bajajinsurance
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=6600
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:16600
+    ports:
+      - "6600:6600"
+      - "16600:16600"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/bajajinsurance:/etc/hyperledger/fabric-ca-server
+    container_name: ca_bajajinsurance
+    networks:
+      - Evidence
+
+  ca_benzmanufacturer:
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-benzmanufacturer
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=7700
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:17700
+    ports:
+      - "7700:7700"
+      - "17700:17700"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/benzmanufacturer:/etc/hyperledger/fabric-ca-server
+    container_name: ca_benzmanufacturer
+    networks:
+      - Evidence
+
+  ca_orderer1:
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orderer1
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=2200
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:12200
+    ports:
+      - "2200:2200"
+      - "12200:12200"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/orderer1:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orderer1
+    networks:
+      - Evidence
+
+ 
+

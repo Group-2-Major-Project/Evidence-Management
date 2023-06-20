@@ -1,0 +1,63 @@
+{
+    "name": "test-network-bajajinsurance",
+    "version": "1.0.0",
+    "isLocal": true,
+    "client": {
+        "organization": "bajajinsurance",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "bajajinsurance": {
+            "mspid": "bajajinsurancemsp",
+            "peers": [
+                "peer0.bajajinsurance",
+                "peer1.bajajinsurance"
+            ],
+            "certificateAuthorities": [
+                "ca.bajajinsurance"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.bajajinsurance": {
+            "url": "grpcs://localhost:6666",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFzCCAb2gAwIBAgIUYAoOJctHQDEMucEwvCmagW4sr3YwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESSDlLa3IlBA9sESgtJK1/4s9\n60NsHIDAGQxzcz96pY7UN6R7R3jg0hNFznqiW/8itN0GCu9tQ7bke6kQKQOGoKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFG9kTHaNcg9T4miTPVo9BUj18f4TMAoGCCqGSM49BAMCA0gAMEUCIQCvljKv9R5A\nq0C5XI+rBSqdiAKRqg4hFrbSjvQc/we9zAIgSLwMzbRYSjQMZP3XQvlBqWzwSypR\nsMVr8LHAFsAcSms=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.bajajinsurance",
+                "hostnameOverride": "peer0.bajajinsurance"
+            }
+        },
+        "peer1.bajajinsurance": {
+            "url": "grpcs://localhost:6676",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFzCCAb2gAwIBAgIUYAoOJctHQDEMucEwvCmagW4sr3YwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESSDlLa3IlBA9sESgtJK1/4s9\n60NsHIDAGQxzcz96pY7UN6R7R3jg0hNFznqiW/8itN0GCu9tQ7bke6kQKQOGoKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFG9kTHaNcg9T4miTPVo9BUj18f4TMAoGCCqGSM49BAMCA0gAMEUCIQCvljKv9R5A\nq0C5XI+rBSqdiAKRqg4hFrbSjvQc/we9zAIgSLwMzbRYSjQMZP3XQvlBqWzwSypR\nsMVr8LHAFsAcSms=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.bajajinsurance",
+                "hostnameOverride": "peer1.bajajinsurance"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.bajajinsurance": {
+            "url": "https://localhost:6600",
+            "caName": "ca-bajajinsurance",
+            "tlsCACerts": {
+                "pem": [
+                    "-----BEGIN CERTIFICATE-----\nMIICFzCCAb2gAwIBAgIUYAoOJctHQDEMucEwvCmagW4sr3YwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESSDlLa3IlBA9sESgtJK1/4s9\n60NsHIDAGQxzcz96pY7UN6R7R3jg0hNFznqiW/8itN0GCu9tQ7bke6kQKQOGoKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFG9kTHaNcg9T4miTPVo9BUj18f4TMAoGCCqGSM49BAMCA0gAMEUCIQCvljKv9R5A\nq0C5XI+rBSqdiAKRqg4hFrbSjvQc/we9zAIgSLwMzbRYSjQMZP3XQvlBqWzwSypR\nsMVr8LHAFsAcSms=\n-----END CERTIFICATE-----\n"
+                ]
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

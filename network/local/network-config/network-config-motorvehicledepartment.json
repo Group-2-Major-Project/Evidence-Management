@@ -1,0 +1,63 @@
+{
+    "name": "test-network-motorvehicledepartment",
+    "version": "1.0.0",
+    "isLocal": true,
+    "client": {
+        "organization": "motorvehicledepartment",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "motorvehicledepartment": {
+            "mspid": "motorvehicledepartmentmsp",
+            "peers": [
+                "peer0.motorvehicledepartment",
+                "peer1.motorvehicledepartment"
+            ],
+            "certificateAuthorities": [
+                "ca.motorvehicledepartment"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.motorvehicledepartment": {
+            "url": "grpcs://localhost:4444",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFzCCAb2gAwIBAgIUBDgj3Xu1/kPPV44SZD4tP67alfUwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEun4ibrfdDLV1NK0oIWmpnC/z\n8IWa6pKEU6BaaI04oy875pmfk4IGKvz1B9RLo84bDN5dSesTV5yuzQMd3DXwoKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFCspx6jzCVVrl6WTC2Ss4YUQ6myaMAoGCCqGSM49BAMCA0gAMEUCIQClb6vRjsBM\ng2MGZMlfZqYCdsW5/WWhfsmS6ORBsehOuAIgQW3nAFf10it128x2Qou/16NW4566\niIvRuGsQo91S6Qc=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.motorvehicledepartment",
+                "hostnameOverride": "peer0.motorvehicledepartment"
+            }
+        },
+        "peer1.motorvehicledepartment": {
+            "url": "grpcs://localhost:4454",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFzCCAb2gAwIBAgIUBDgj3Xu1/kPPV44SZD4tP67alfUwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEun4ibrfdDLV1NK0oIWmpnC/z\n8IWa6pKEU6BaaI04oy875pmfk4IGKvz1B9RLo84bDN5dSesTV5yuzQMd3DXwoKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFCspx6jzCVVrl6WTC2Ss4YUQ6myaMAoGCCqGSM49BAMCA0gAMEUCIQClb6vRjsBM\ng2MGZMlfZqYCdsW5/WWhfsmS6ORBsehOuAIgQW3nAFf10it128x2Qou/16NW4566\niIvRuGsQo91S6Qc=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.motorvehicledepartment",
+                "hostnameOverride": "peer1.motorvehicledepartment"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.motorvehicledepartment": {
+            "url": "https://localhost:4400",
+            "caName": "ca-motorvehicledepartment",
+            "tlsCACerts": {
+                "pem": [
+                    "-----BEGIN CERTIFICATE-----\nMIICFzCCAb2gAwIBAgIUBDgj3Xu1/kPPV44SZD4tP67alfUwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIzMDYyMDEzNDkwMFoXDTM4MDYxNjEzNDkwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEun4ibrfdDLV1NK0oIWmpnC/z\n8IWa6pKEU6BaaI04oy875pmfk4IGKvz1B9RLo84bDN5dSesTV5yuzQMd3DXwoKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFCspx6jzCVVrl6WTC2Ss4YUQ6myaMAoGCCqGSM49BAMCA0gAMEUCIQClb6vRjsBM\ng2MGZMlfZqYCdsW5/WWhfsmS6ORBsehOuAIgQW3nAFf10it128x2Qou/16NW4566\niIvRuGsQo91S6Qc=\n-----END CERTIFICATE-----\n"
+                ]
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

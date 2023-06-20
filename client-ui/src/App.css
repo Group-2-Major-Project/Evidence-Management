@@ -1,0 +1,207 @@
+@import '~antd/dist/antd.min.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a:hover {
+  color: var(--pink) !important;
+}
+
+.app {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+  margin-bottom: 6px;
+}
+.save-btn{
+  width: 50%;
+  margin-left: 50%;
+}
+
+.login-items {
+  position: relative;
+}
+.ant-page-header-heading-title{
+  color: #3e0508;
+  font-size: 24px;
+}
+
+.main {
+  margin-left: 20%;
+  height: 100%;
+
+}
+.header-nav-bar{
+  display: none;
+}
+.ant-table-tbody > tr > td{
+  padding: 10px !important;
+}
+.ant-layout {
+  padding-top: 26px;
+  height: 100% !important;
+  background: #f8f5f5 !important;
+}
+
+.routes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar {
+  position: fixed;
+  left: 0;
+  padding-top: 32px;
+  height: 100vh;
+  width: 20%;
+  background-color:#44080b;
+}
+.ant-menu-item .ant-menu-item-icon{
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.logo-container {
+  display: flex;
+  padding: 12px;
+  background: -webkit-linear-gradient(to right, #dd1818, #333333);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #dd1818, #333333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+h2.ant-typography{
+  margin-bottom: 0;
+}
+.ant-menu-vertical{
+  border-right: none;
+}
+.ant-menu{
+  background-color:#44080b;
+  color: white;
+}
+.ant-menu-item a{
+  color: white !important;
+}
+.logo {
+  margin: 0 0 0 15px;
+}
+
+.logo a {
+  color: white;
+}
+
+.logo a:hover {
+  color: white !important;
+}
+
+.menu-control-container {
+  display: none !important;
+  position: absolute !important;
+  right: 10px !important;
+  top: 25px !important;
+  font-size: 1.2rem !important;
+  background-color: var(--bgSecondary) !important;
+  border: none !important;
+  color: white;
+}
+
+.loader {
+  height: 81vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ant-table-thead > tr > th{
+  color: #fafafa;
+  font-weight: 600;
+  font-size: 15px;
+  background: #560e0e;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: #c51d26;
+}
+
+.ant-form-item{
+  text-align: center;
+}
+
+@media screen and (max-width:800px) {
+  .app {
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .form-wrapper {
+    width: 100% !important;
+    height: calc(100vh - 260px);
+    overflow: auto;
+  }
+  .save-btn{
+    margin-left:0;
+    margin-top: 16px;
+  }
+  .ant-form-item{
+    margin-bottom: 12px;
+  }
+  
+  .navbar {
+    display: none;
+  }
+  .header-nav-bar{
+    display: block;
+  }
+
+  .main {
+    margin-left: 0px;
+  }
+  .ant-form-item-label {
+    padding: 0 !important;
+  }
+
+  .menu-control-container {
+    display: block !important;
+    margin-top: -12px;
+  }
+
+  .ant-menu {
+    position: absolute;
+    right: 0px;
+    top: 56px;
+    z-index: 2;
+  }
+
+  .home-title {
+    font-size: 1.4rem !important;
+  }
+
+  .show-more {
+    font-size: 1.3rem !important;
+  }
+}
+
+.footer {
+  background-color: #3e0508;
+  bottom: 0;
+  width: 100%;
+  align-items: center;
+  position: fixed;
+  padding: 12px;
+}
+
+.button {
+  padding-right: 10px;
+  padding-top: 5px;
+}
